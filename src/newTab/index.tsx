@@ -9,6 +9,8 @@ import 'material-icons/iconfont/material-icons.css'
 import "@fortawesome/fontawesome-free/js/all.js";
 import "@fortawesome/fontawesome-free/css/all.css";
 import $ from 'jquery';
+import Tabs from "./tab";
+import {HashRouter}from "react-router-dom";
 
 require("../content/js/core/popper.min.js");
 require("../content/js/plugins/perfect-scrollbar.min.js");
@@ -19,9 +21,9 @@ require("../content/js/plugins/jkanban/jkanban.js");
 
 
 const Options = (
-    <div>
-        <h1 className="text-4xl text-green-500">New Tabs</h1>
-    </div>
+    <HashRouter>
+        <Tabs/>
+    </HashRouter>
 )
 
 const container = document.createElement('div')
