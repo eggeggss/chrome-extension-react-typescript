@@ -9,7 +9,8 @@ module.exports = {
          popup:path.resolve('./src/popup/popup.tsx'),
          options: path.resolve('./src/options/option.tsx'),
          background:path.resolve('./src/background/background.ts'),
-         contentScript:path.resolve('./src/contentScript/contentScript.ts')
+         contentScript:path.resolve('./src/contentScript/contentScript.ts'),
+         newTab:path.resolve('./src/newTab/index.tsx')
     },
     plugins: [
         new CopyPlugin({
@@ -30,7 +31,8 @@ module.exports = {
         }),
         ...getHtmlPlugins([
             'popup',
-            'options'
+            'options',
+            'newTab'
         ])
     ],
     module: {
