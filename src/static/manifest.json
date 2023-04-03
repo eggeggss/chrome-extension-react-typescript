@@ -8,6 +8,27 @@
         "default_title": "React Boilerplate",
         "default_icon": "icon.png"
     },
+    "background":{
+        "service_worker":"background.js"
+    },
+    "permissions": [
+        "notifications",
+        "storage",
+        "alarms",
+        "tabs",
+        "scripting",
+        "activeTab",
+        "contextMenus"
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "content_scripts":[
+        {
+          "matches":["https://*.google.com.tw/*"],
+          "js":["contentScript.js"]
+        }
+    ],
     "options_page": "options.html",
     "icons":{
         "16":"icon.png",
