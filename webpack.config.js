@@ -21,11 +21,10 @@ module.exports = {
                 },
             ],
         }),
-        new HtmlPlugin({
-            title: 'ReactJS Boilerplate',
-            filename:'popup.html',
-            chunks:['popup']
-        })
+        ...getHtmlPlugins([
+            'popup',
+            'option'
+        ])
     ],
     module: {
         rules: [
@@ -47,3 +46,15 @@ module.exports = {
         filename: '[name].js'
     },
 };
+
+function getHtmlPlugins(chunks){
+
+    return chunks.map(chunk=> new HtmlPlugin({
+
+          title:"React Extension",
+          filename: `${chunk}.html`,
+          chunks:[chunk]
+         
+    }))
+
+}
