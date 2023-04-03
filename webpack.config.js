@@ -6,7 +6,8 @@ module.exports = {
     mode: "development",
     devtool:'cheap-module-source-map',
     entry: {
-         popup:path.resolve('./src/popup/popup.tsx')
+         popup:path.resolve('./src/popup/popup.tsx'),
+         options: path.resolve('./src/options/option.tsx')
     },
     plugins: [
         new CopyPlugin({
@@ -19,11 +20,15 @@ module.exports = {
                     from: path.resolve('src/assets'),
                     to: path.resolve('dist')
                 },
+                {
+                    from: path.resolve('src/content'),
+                    to: path.resolve('dist/content')
+                },
             ],
         }),
         ...getHtmlPlugins([
             'popup',
-            'option'
+            'options'
         ])
     ],
     module: {
@@ -47,14 +52,10 @@ module.exports = {
     },
 };
 
-function getHtmlPlugins(chunks){
-
-    return chunks.map(chunk=> new HtmlPlugin({
-
-          title:"React Extension",
-          filename: `${chunk}.html`,
-          chunks:[chunk]
-         
+function getHtmlPlugins(chunks) {
+    return chunks.map(chunk => new HtmlPlugin({
+        title: 'React Extension',
+        filename: `${chunk}.html`,
+        chunks: [chunk]
     }))
-
 }

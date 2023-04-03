@@ -8,6 +8,7 @@
         "default_title": "React Boilerplate",
         "default_icon": "icon.png"
     },
+    "options_page": "options.html",
     "icons":{
         "16":"icon.png",
         "48": "icon.png",
