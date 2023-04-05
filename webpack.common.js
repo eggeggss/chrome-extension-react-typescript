@@ -9,7 +9,7 @@ module.exports = {
          popup:path.resolve('./src/popup/index.tsx'),
          options: path.resolve('./src/options/option.tsx'),
          background:path.resolve('./src/background/background.ts'),
-         contentScript:path.resolve('./src/contentScript/contentScript.ts'),
+         contentScript:path.resolve('./src/contentScript/index.tsx'),
          newTab:path.resolve('./src/newTab/index.tsx')
     },
     plugins: [
@@ -53,6 +53,14 @@ module.exports = {
     },
     output: {
         filename: '[name].js'
+    },
+    optimization: {
+        splitChunks: {
+            chunks(chunk) {
+                // exclude `my-excluded-chunk`
+                return chunk.name !== 'contentScript';
+            },
+        },
     },
 };
 
