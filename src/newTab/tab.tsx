@@ -3,8 +3,6 @@ import { Route,Routes } from 'react-router-dom';
 import About from './component/about';
 import Home from './component/home';
 
-
-
 const Tabs:React.FC = () => {
     return (
         <div>

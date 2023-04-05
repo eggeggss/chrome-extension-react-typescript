@@ -1,34 +1,66 @@
-import React from 'react';
-import {createRoot} from 'react-dom/client';
-import '../assets/app.css';
-import '../content/css/nucleo-icons.css';
-import '../content/css/googlefont.css';
-import '../content/css/nucleo-svg.css';
-import '../content/css/material-dashboard.css?v=3.0.5';
-import 'material-icons/iconfont/material-icons.css'
-import "@fortawesome/fontawesome-free/js/all.js";
-import "@fortawesome/fontawesome-free/css/all.css";
-import $ from 'jquery';
-import Body from '../component/body';
+import React, { useEffect, useState } from 'react';
 
+const Popup:React.FC = () => {
+    const [gname,setGname]=useState();
 
-require("../content/js/core/popper.min.js");
-require("../content/js/plugins/perfect-scrollbar.min.js");
-require("../content/js/core/bootstrap.bundle.min.js");
-require("../content/js/plugins/smooth-scrollbar.min.js");
-require("../content/js/plugins/dragula/dragula.min.js");
-require("../content/js/plugins/jkanban/jkanban.js");
+    const handleInput =(e)=>{
+        
+        e.preventDefault();
 
-const test = (
-    <>
-        <Body/>
-        <i className='fa-sharp fa-solid fa-square-info'></i>
-        <h1>Hello world</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque labore odio ipsam nam laborum tempora dolor laboriosam nihil. Qui eligendi nobis fugiat omnis. Saepe nulla dignissimos accusamus minus laboriosam quaerat!</p>
-    </>
-)
+        const myname=e.target[0].value;
+        chrome.storage.sync.set({
+            name:myname
+        },()=>{
+            console.log(`write to local storage ${myname}`);
+        })
+        //alert(e.target[0].value);
+        //console.log(e.target[0].value);
+    }
 
-const container=document.createElement('div')
-document.body.appendChild(container);
-const root=createRoot(container);
-root.render(test)
+    const setName=(e)=>{
+        setGname(e.target.value);
+    }
+
+    useEffect(()=>{
+
+        chrome.storage.sync.get(["name"],(res)=>{
+            setGname(res.name);     
+            console.log(`read local storage ${res.name}`);
+        })
+
+    },[])
+
+    return (
+        <div>
+            <div className="card mt-5">
+                <div className="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div className="bg-gradient-info shadow-warning border-radius-lg py-3 pe-1 text-center py-4">
+                        <div >
+                            <i className="fab fa-slack text-white fa-lg"></i>
+                            <h3 className="font-weight-bolder text-white ms-3" 
+                                style={{display:"inline-block"}} >KM SYSTEM</h3>
+                        </div>
+                        <p className="mb-0 text-sm text-white text-110">please login</p>
+                    </div>
+                </div>
+                <div className="card-body py-4">
+                    <form role="form" onSubmit={handleInput}>
+                        <div className="input-group input-group-static mb-4">
+                            <label>Account</label>
+                            <input type="email" className="form-control" 
+                                defaultValue={gname}
+                                onChange={setName}
+                                placeholder="john@email.com"/>
+                        </div>
+                        <div className="text-center">
+                            <input type="submit" value="提交"
+                                className="btn bg-gradient-info w-100 mt-4 mb-0"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Popup;
