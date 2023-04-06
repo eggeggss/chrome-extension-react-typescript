@@ -1,6 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import '../assets/app.css';
+// import '../assets/app.css';
+import '../assets/content.css';
 import '../content/css/nucleo-icons.css';
 import '../content/css/googlefont.css';
 import '../content/css/nucleo-svg.css';
